@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>ChatGPT-3.5 Turbo Demo</title>
+</head>
+<body>
+    <div id="chatlog"></div>
+    <form>
+        <input type="text" id="input" />
+        <button type="submit">Send</button>
+    </form>
+    
+    <script>
+        // ChatGPT-3.5 Turbo API code goes here
+        // TODO: Replace the API_KEY with your ChatGPT-3.5 Turbo API key
+const API_KEY = 'YOUR_API_KEY_HERE';
+
+const chatlog = document.getElementById('chatlog');
+const form = document.querySelector('form');
+const input = document.getElementById('input');
+
+// Add event listener to form
+form.addEventListener('submit', event => {
+  event.preventDefault();
+  sendMessage(input.value);
+  input.value = '';
+});
+
+function sendMessage(message) {
+  // Call ChatGPT-3.5 Turbo API
+  fetch('https://api.chatgpt35turbo.com/send', {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${API_KEY}`
+    },
+    body: JSON.stringify({ message })
+  })
+  .then(response => response.json())
+  .then(response => {
+    // Add bot response to chatlog
+    const bot
+response.message;
+const chatlogEntry = document.createElement('div');
+chatlogEntry.classList.add('chatlog-entry');
+chatlogEntry.innerHTML = `
+  <div class="message-bot">${botMessage}</div>
+`;
+chatlog.appendChild(chatlogEntry);
+
+// Scroll to bottom of chatlog
+chatlog.scrollTop = chatlog.scrollHeight;
+})
+.catch(error => {
+console.error(error);
+});
+}
+    </script>
+</body>
+</html>
